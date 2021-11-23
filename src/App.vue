@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-header/>
+    <b-showcase/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BHeader from "@/components/BHeader";
+import BShowcase from "@/components/BShowcase";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BHeader,
+    BShowcase
   }
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@500&family=Outfit:wght@500&family=Rubik&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
