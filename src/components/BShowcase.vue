@@ -1,42 +1,66 @@
 <template>
   <main class="showcase-area">
+    <BSearchbar @search="searchNft" :searched="searched"/>
     <div class="centered">
-      <section class="card-layout">
-        <Card v-for="nft in nfts" :key="nft.token_id" :nft="nft"/>
+      <section v-if="isFiltered" class="card-layout">
+        <BCard v-for="nft in filteredNfts" :key="nft.token_id" :nft="nft"/>
+      </section>
+      <section v-if="!isFiltered" class="card-layout">
+        <BCard v-for="nft in nfts" :key="nft.token_id" :nft="nft"/>
       </section>
     </div>
   </main>
 </template>
 
 <script>
-import Card from "@/components/Card";
+import BCard from "@/components/BCard";
+import BSearchbar from "@/components/BSearchbar";
 
 export default {
-  name: 'Showcase',
+  name: "Showcase",
   components: {
-    Card
+    BCard,
+    BSearchbar,
   },
   data() {
     return {
       nfts: [],
-      errors: []
-    }
+      errors: [],
+      filteredNfts: [],
+      searched: '',
+      isFiltered: false,
+    };
   },
   beforeMount() {
     this.fetchNFTs();
+    console.log(this.isFiltered);
   },
   methods: {
     async fetchNFTs() {
       try {
-        const {data: {data, status}} = await this.$axios.get("/");
+        const {
+          data: {data, status},
+        } = await this.$axios.get("/");
         console.info(data, status);
         this.nfts = data;
       } catch (error) {
         this.errors.push(error);
       }
     },
-  }
-}
+    searchNft(query) {
+      if (query.length > 0) {
+        this.isFiltered = true;
+        this.searched = query;
+        this.filteredNfts = this.nfts.filter(nft => {
+          return nft.name.toLowerCase().includes(query.toLowerCase());
+        });
+      } else {
+        this.isFiltered = false;
+        this.searched = '';
+      }
+    }
+  },
+};
 </script>
 
 <style scoped>
