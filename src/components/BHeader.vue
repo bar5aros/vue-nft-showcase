@@ -12,13 +12,13 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
-      title: 'Vue.js'
-    }
-  }
-}
+      title: "Vue.js",
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -29,6 +29,6 @@ export default {
 .site-title {
   color: white;
   font-size: 3rem;
-  font-family: 'Outfit', Arial, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
 }
 </style>
